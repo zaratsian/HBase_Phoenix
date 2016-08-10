@@ -1,0 +1,99 @@
+
+hbase shell
+
+###########################################################################################################
+#
+#   Create Hbase Table from "hbase shell"
+#
+###########################################################################################################
+# Called "customer_info" with a section called "profile"
+# Table Name: customer_info
+######################################################################
+#   Row Key    #                    profile                          #
+######################################################################
+#     id       #     name       #    location     #     balance      #
+######################################################################
+create "customer_info", "profile"
+list
+
+
+###########################################################################################################
+#
+#   Add Data
+#   Syntax:     put ’<table name>’,’row1’,’<colfamily:colname>’,’<value>’
+#
+###########################################################################################################
+put 'customer_info','1','profile:name','frank'
+put 'customer_info','1','profile:location','north carolina'
+put 'customer_info','1','profile:balance','$100,000'
+
+put 'customer_info','2','profile:name','dean'
+put 'customer_info','2','profile:location','new york'
+put 'customer_info','2','profile:balance','$90,000'
+
+put 'customer_info','3','profile:name','sammy'
+put 'customer_info','3','profile:location','nevada'
+put 'customer_info','3','profile:balance','$75,000'
+
+
+
+###########################################################################################################
+#
+#   Reading Data 
+#
+###########################################################################################################
+describe 'customer_info'
+get 'customer_info','2'
+get 'customer_info','2','profile:balance'
+scan 'customer_info',  {COLUMNS=>['profile:name']}
+
+
+
+###########################################################################################################
+#
+#   Take a Snapshot
+#   https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_hbase_snapshots_guide/bk_hbase_snapshots_guide-20150721.pdf
+#   http://hbase.apache.org/book.html#ops.snapshots
+#   snapshot 'myTable', 'myTableSnapshot'
+#
+###########################################################################################################
+snapshot 'customer_info', 'customer_info_ss'
+list_snapshots
+
+
+
+###########################################################################################################
+#
+#   Copy/Export Snapshot to HDFS
+#   https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.6/bk_hbase_snapshots_guide/bk_hbase_snapshots_guide-20160628.pdf
+#               
+###########################################################################################################
+#hbase org.apache.hadoop.hbase.snapshot.ExportSnapshot -snapshot customer_info_ss_20160804 -copy-to hdfs://sandbox.hortonworks.com/tmp/ -mappers 1
+
+
+
+###########################################################################################################
+#
+#   Hive HBaseTableSnapshotInputFormat
+#   https://community.hortonworks.com/articles/14806/working-with-hbase-and-hive-wip.html
+#   https://issues.apache.org/jira/browse/HIVE-6584
+#
+#   WORKING Example
+#               
+###########################################################################################################
+
+# Create temp restore directory - this is the location where the Hbase Snapshot will be restored
+sudo -u hdfs hdfs dfs -mkdir /tmp/hbase_snapshots
+
+hive
+
+# Create Hive Table
+CREATE TABLE if not exists hive_hbase_ss (key string, name string, location string, balance string, time timestamp) 
+STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+WITH SERDEPROPERTIES ("hbase.columns.mapping" = ":key,profile:name,profile:location,profile:balance,:timestamp")
+TBLPROPERTIES ("hive.hbase.snapshot.name"="customer_info_ss");
+
+# Query HBase Snapshot from Hive
+set hive.hbase.snapshot.name=customer_info_ss;
+set hive.hbase.snapshot.restoredir=/tmp/hbase_snapshots;
+select * from hive_hbase_ss where time >= '2016-08-10 18:51:32.100';
