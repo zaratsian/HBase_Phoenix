@@ -1,6 +1,27 @@
-<h3>Hbase Script and Code Examples</h3>
-<p>
-This repo contains scripts related to Hbase. Specifically, how take an Hbase snapshot in HDFS, then read it into Hive for query and analysis. Compliments to Artem for putting together some tricks and tips on the <a href="https://community.hortonworks.com/articles/14806/working-with-hbase-and-hive-wip.html">Hortonworks Community page</a>, which I used as part of my script. 
+<h3><a href="https://hbase.apache.org/book.html">Apache HBase</a> and <a href="https://phoenix.apache.org/">Apache Phoenix</a></h3>
+Scripts, tricks, and references
 <br>
-<br>note.json can be viewed using https://www.zeppelinhub.com/viewer
-</p>
+<br><b>HBase Syntax:</b>
+<br>
+<br>./bin/hbase shell
+<br>list                                 # List HBase Tables
+<br>status                               # Server status
+<br>create 'table_name','column_family'  # Create HBase Table
+<br>scan 'table_name'                    # Scan Table
+<br>get 'table_name','row1'              # Get row within Table
+<br>get 'table_name', 'rowid', {COLUMN => 'column family:column name'}
+<br>put 'table_name','row','Column family:column name','new value'
+<br>disable 'table_name'                 # Delete Table - First disable
+<br>drop 'table_name'                    # Delete Table - Then drop
+<br>
+<br>
+<br><b>Phoenix Syntax:</b>
+<br>
+<br>python ./bin/sqlline.py zookeeper_host:zookeeper_port      # python ./bin/sqlline.py localhost:2181
+<br>jdbc:phoenix:sandbox.hortonworks.com:2181:/hbase-unsecure  # Example database Connection URL
+<br>
+<br>
+<br><b>References:</b>
+<br><a href="https://hbase.apache.org/book.html">Docs - Apache HBase</a>
+<br><a href="https://phoenix.apache.org">Docs - Apache Phoenix</a>
+<br>
