@@ -7,6 +7,7 @@ Scripts, tricks, and references
 <br>list                                 # List HBase Tables
 <br>status                               # Server status
 <br>create 'table_name','column_family'  # Create HBase Table
+<br>alter 'ztable', NAME => 'colfam', VERSIONS => 5  # Set max versions to 5 for columnfamily 'colfam'
 <br>scan 'table_name'                    # Scan Table
 <br>get 'table_name','row1'              # Get row within Table
 <br>get 'table_name', 'rowid', {COLUMN => 'column family:column name'}
