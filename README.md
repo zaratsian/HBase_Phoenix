@@ -11,6 +11,7 @@ Scripts, tricks, and references
 <br>scan 'table_name'                    # Scan Table
 <br>get 'table_name','row1'              # Get row within Table
 <br>get 'table_name', 'rowid', {COLUMN => 'column family:column name'}
+<br>get 'ztable', '111', {COLUMN => 'colfam:name', VERSIONS => 5}  # Get last 5 versions for colfam:name, row=111
 <br>put 'table_name','row','Column family:column name','new value'
 <br>disable 'table_name'                 # Delete Table - First disable
 <br>drop 'table_name'                    # Delete Table - Then drop
