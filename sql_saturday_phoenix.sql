@@ -23,7 +23,9 @@ SELECT * FROM MM_SEASON LIMIT 10;
 
 !describe mm_season
 
+
 ###############################################################################################################
+
 
 CREATE TABLE IF NOT EXISTS mm_teams
     (team_id VARCHAR, team_name VARCHAR
@@ -41,15 +43,15 @@ SELECT * FROM mm_teams LIMIT 10;
 
 !describe mm_teams;
 
+
 ###############################################################################################################
 #
-#   Phoenix - Join + Aggregations
+#   Phoenix - Join + Calculations
 #
 ###############################################################################################################
 
-###################################################
-# Find the top 15 Teams with the most wins
-###################################################
+
+# Calculate the Top 15 Teams with the most Wins
 SELECT WTEAM_NAME, COUNT(*) AS WINS 
 
     FROM 
@@ -69,9 +71,7 @@ SELECT WTEAM_NAME, COUNT(*) AS WINS
 
 
 
-###################################################
-# Find the top 15 Teams with the most losses
-###################################################
+# Calculate the Top 15 Teams with the most Losses
 SELECT LTEAM_NAME, COUNT(*) AS LOSSES 
 
     FROM 
@@ -91,9 +91,8 @@ SELECT LTEAM_NAME, COUNT(*) AS LOSSES
 
 
 
-###################################################
-# Find the biggest win margins
-###################################################
+
+# Calculate the Top 15 Matchups with the biggest score difference
 SELECT SEASON, WSCORE, LSCORE, WLOC, (WSCORE-LSCORE) AS SCORE_DIFF, WTEAM_NAME, LTEAM_NAME
 
     FROM 
@@ -108,6 +107,8 @@ SELECT SEASON, WSCORE, LSCORE, WLOC, (WSCORE-LSCORE) AS SCORE_DIFF, WTEAM_NAME, 
     ) 
     
     ORDER BY SCORE_DIFF DESC
-    LIMIT 10;
+    LIMIT 15;
+
+
 
 #ZEND
