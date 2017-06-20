@@ -24,6 +24,6 @@ echo "select
         and SOURCE_DATETIME >= TO_TIME('2017-05-01 09:30:00.000')
         and SOURCE_DATETIME <  TO_TIME('2017-05-01 09:31:00.000')
     order by SOURCE_DATETIME desc, MSG_SEQ_NBR desc
-    limit 1;""" > phoenixquery1.sql
+    limit 1;" > phoenixquery1.sql
 
 python /usr/hdp/2.6.1.0-129/phoenix/bin/sqlline.py biren-hbase0.field.hortonworks.com,biren-hbase1.field.hortonworks.com,biren-hbase2.field.hortonworks.com:2181:/hbase-unsecure phoenixquery1.sql
