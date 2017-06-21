@@ -41,4 +41,33 @@ echo "CREATE TABLE if not exists ZMKTDATA (
 
 /usr/hdp/2.6.1.0-129/phoenix/bin/psql.py -d '~' -t ZMKTDATA  biren-hbase0.field.hortonworks.com,biren-hbase1.field.hortonworks.com,biren-hbase2.field.hortonworks.com:2181 create_table_mktdata.sql /root/data/MktData.csv
 
+
+echo "CREATE TABLE if not exists ZLOOKUPS (
+    ORDERID             INTEGER         NOT NULL,
+    SYMBOL              CHAR(4),
+    ORDER_DT            TIMESTAMP,      
+    ASKPRICE            DECIMAL(17,6),    
+    ASKQTY              UNSIGNED_INT,
+    BIDPRICE            DECIMAL(17,6),    
+    BIDQTY              UNSIGNED_INT,
+    QUOTETIME           TIMESTAMP, 
+    FEED                VARCHAR(10),      
+    SEQNUM              UNSIGNED_INT,
+    WINDOWAVGASKQTY     UNSIGNED_INT,
+    WINDOWAVGBIDQTY     UNSIGNED_INT,
+    WINDOWTIMEBEGIN     TIMESTAMP,
+    WindowTimeEnd       TIMESTAMP,
+    Crossed30Plus       CHAR(1),       
+    microsec1           BIGINT,         
+    microsec2           BIGINT,          
+    microsec3           BIGINT,          
+    CONSTRAINT pk PRIMARY KEY (OrderID))
+    DATA_BLOCK_ENCODING='FAST_DIFF',
+    IMMUTABLE_ROWS=true,
+    DISABLE_WAL=true,
+    SALT_BUCKETS=10;" > create_table_lookups.sql
+
+/usr/hdp/2.6.1.0-129/phoenix/bin/psql.py biren-hbase0.field.hortonworks.com,biren-hbase1.field.hortonworks.com,biren-hbase2.field.hortonworks.com:2181 create_table_lookups.sql
+
+
 #ZEND
