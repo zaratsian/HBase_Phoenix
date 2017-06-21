@@ -33,7 +33,7 @@ echo "CREATE TABLE if not exists ZMKTDATA (
     SOURCE_DATE             DATE,
     SOURCE_DATETIME         TIMESTAMP       NOT NULL,
     LULD_NBBO               CHAR(1),
-    CONSTRAINT pk PRIMARY KEY (SECURITY_SYM,SOURCE_DATETIME))
+    CONSTRAINT pk PRIMARY KEY (SECURITY_SYMBOL,SOURCE_DATETIME))
     DATA_BLOCK_ENCODING='FAST_DIFF',
     IMMUTABLE_ROWS=true,
     DISABLE_WAL=true,
@@ -61,7 +61,7 @@ echo "CREATE TABLE if not exists ZLOOKUPS (
     microsec1           BIGINT,         
     microsec2           BIGINT,          
     microsec3           BIGINT,          
-    CONSTRAINT pk PRIMARY KEY (OrderID))
+    CONSTRAINT pk PRIMARY KEY (ORDERID))
     DATA_BLOCK_ENCODING='FAST_DIFF',
     IMMUTABLE_ROWS=true,
     DISABLE_WAL=true,
