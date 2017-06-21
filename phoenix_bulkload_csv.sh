@@ -1,9 +1,9 @@
 
 echo "CREATE TABLE if not exists ZORDERLOOKUPS (
-    OID INTEGER NOT NULL,
-    SYM CHAR(4),
-    ODT TIMESTAMP,
-    CONSTRAINT PK PRIMARY KEY (OID))
+    ORDERID INTEGER NOT NULL,
+    SYMBOL CHAR(4),
+    ORDERDATETIME TIMESTAMP,
+    CONSTRAINT PK PRIMARY KEY (ORDERID))
     DATA_BLOCK_ENCODING='FAST_DIFF',
     IMMUTABLE_ROWS=true,
     DISABLE_WAL=true,
@@ -16,7 +16,7 @@ echo "CREATE TABLE if not exists ZMKTDATA (
     FEED                    VARCHAR(6),
     FEED_NAME               VARCHAR(10),
     MSG_SEQ_NBR             UNSIGNED_INT,
-    SECURITY_SYM            CHAR(4)         NOT NULL,
+    SECURITY_SYMBOL         CHAR(4)         NOT NULL,
     LVL1_QT_MSG_TYPE        CHAR(1),
     BID_PRICE               DECIMAL(19,8),
     BID_LOT_QTY             UNSIGNED_INT,
@@ -45,7 +45,7 @@ echo "CREATE TABLE if not exists ZMKTDATA (
 echo "CREATE TABLE if not exists ZLOOKUPS (
     ORDERID             INTEGER         NOT NULL,
     SYMBOL              CHAR(4),
-    ORDER_DT            TIMESTAMP,      
+    ORDERDATETIME       TIMESTAMP,      
     ASKPRICE            DECIMAL(17,6),    
     ASKQTY              UNSIGNED_INT,
     BIDPRICE            DECIMAL(17,6),    
