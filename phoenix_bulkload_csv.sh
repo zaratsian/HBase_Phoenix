@@ -63,7 +63,6 @@ echo "CREATE TABLE if not exists ZLOOKUPS (
     microsec3           BIGINT,          
     CONSTRAINT pk PRIMARY KEY (ORDERID))
     DATA_BLOCK_ENCODING='FAST_DIFF',
-    IMMUTABLE_ROWS=true,
     DISABLE_WAL=true,
     SALT_BUCKETS=10;" > create_table_lookups.sql
 
