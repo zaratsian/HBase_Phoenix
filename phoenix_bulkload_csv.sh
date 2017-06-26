@@ -1,4 +1,5 @@
 
+
 echo "CREATE TABLE if not exists ZORDERLOOKUPS (
     ORDERID INTEGER NOT NULL,
     SYMBOL CHAR(4),
@@ -67,6 +68,11 @@ echo "CREATE TABLE if not exists ZLOOKUPS (
     SALT_BUCKETS=0;" > create_table_lookups.sql
 
 /usr/hdp/2.6.1.0-129/phoenix/bin/psql.py biren-hbase0.field.hortonworks.com,biren-hbase1.field.hortonworks.com,biren-hbase2.field.hortonworks.com:2181 create_table_lookups.sql
+
+
+
+CREATE INDEX IF NOT EXISTS ZINDEX ON ZMKTDATA (SOURCE_DATETIME) include (BID_PRICE, BID_LOT_QTY, ASK_PRICE, ASK_LOT_QTY, FEED_NAME, MSG_SEQ_NBR);
+
 
 
 #ZEND
