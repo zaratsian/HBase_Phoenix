@@ -8,7 +8,7 @@ echo "CREATE TABLE if not exists ZORDERLOOKUPS (
     DATA_BLOCK_ENCODING='FAST_DIFF',
     IMMUTABLE_ROWS=true,
     DISABLE_WAL=true,
-    SALT_BUCKETS=0;" > create_table_orderlookups.sql
+    SALT_BUCKETS=10;" > create_table_orderlookups.sql
 
 /usr/hdp/2.6.1.0-129/phoenix/bin/psql.py -d '~' -t ZORDERLOOKUPS  biren-hbase0.field.hortonworks.com,biren-hbase1.field.hortonworks.com,biren-hbase2.field.hortonworks.com:2181 create_table_orderlookups.sql /root/data/OrderLookups.csv
 
@@ -38,7 +38,7 @@ echo "CREATE TABLE if not exists ZMKTDATA (
     DATA_BLOCK_ENCODING='FAST_DIFF',
     IMMUTABLE_ROWS=true,
     DISABLE_WAL=true,
-    SALT_BUCKETS=0;" > create_table_mktdata.sql
+    SALT_BUCKETS=10;" > create_table_mktdata.sql
 
 /usr/hdp/2.6.1.0-129/phoenix/bin/psql.py -d '~' -t ZMKTDATA  biren-hbase0.field.hortonworks.com,biren-hbase1.field.hortonworks.com,biren-hbase2.field.hortonworks.com:2181 create_table_mktdata.sql /root/data/MktData.csv
 
@@ -65,7 +65,7 @@ echo "CREATE TABLE if not exists ZLOOKUPS (
     CONSTRAINT pk PRIMARY KEY (ORDERID))
     DATA_BLOCK_ENCODING='FAST_DIFF',
     DISABLE_WAL=true,
-    SALT_BUCKETS=0;" > create_table_lookups.sql
+    SALT_BUCKETS=10;" > create_table_lookups.sql
 
 /usr/hdp/2.6.1.0-129/phoenix/bin/psql.py biren-hbase0.field.hortonworks.com,biren-hbase1.field.hortonworks.com,biren-hbase2.field.hortonworks.com:2181 create_table_lookups.sql
 
