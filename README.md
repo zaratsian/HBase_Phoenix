@@ -1,7 +1,7 @@
 <h3><a href="https://hbase.apache.org/book.html">Apache HBase</a> and <a href="https://phoenix.apache.org/">Apache Phoenix</a></h3>
 Scripts, tricks, and references
 <br>
-<br><b>HBase Syntax:</b>
+<br><b>APACHE HBASE</b>
 <br>
 <br>./bin/hbase shell
 <br>list                                 # List HBase Tables
@@ -17,13 +17,17 @@ Scripts, tricks, and references
 <br>drop 'table_name'                    # Delete Table - Then drop
 <br>
 <br>
-<br><b>Phoenix Syntax:</b>
+<br><b>APACHE PHOENIX</b>
 <br>
-<br>python ./bin/sqlline.py zookeeper_host:zookeeper_port      # python ./bin/sqlline.py localhost:2181
-<br>jdbc:phoenix:sandbox.hortonworks.com:2181:/hbase-unsecure  # Example database Connection URL
+<br><b>Connecting to Phoenix:</b>
+<br><code>python ./bin/sqlline.py zookeeper_host:zookeeper_port</code>
+<br><code>jdbc:phoenix:zookeeper_host:zookeeper_port:/hbase-unsecure</code>
+<br>
+<br>Phoenix Syntax:
+<br><code>!tables</code>
 <br>
 <br>
 <br><b>References:</b>
-<br><a href="https://hbase.apache.org/book.html">Docs - Apache HBase</a>
-<br><a href="https://phoenix.apache.org">Docs - Apache Phoenix</a>
+<br><a href="https://hbase.apache.org/book.html">Apache HBase Docs</a>
+<br><a href="https://phoenix.apache.org">Apache Phoenix Docs</a>
 <br>
